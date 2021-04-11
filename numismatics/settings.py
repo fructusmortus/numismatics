@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'custom_user.apps.CustomUserConfig',
     'home',
+    'coin_banknote',
 ]
 
 MIDDLEWARE = [
@@ -130,4 +131,4 @@ STATICFILES_DIRS = [
 
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
-CRISPY_TEMPLATE_PACK="bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
