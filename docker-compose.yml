@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=numismatics
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    restart: always
+    networks:
+      services-network:
+        aliases:
+         - db
+  web:
+    build: .
+    image: django
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; python manage.py runserver 0.0.0.0:8000'
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      services-network:
+        aliases:
+         - web
+  migration:
+    image: django
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; python manage.py migrate --noinput'
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+    networks:
+      services-network:
+        aliases:
+         - migration  
+networks:
+ services-network:
+   name: services-network
+   driver: bridge
