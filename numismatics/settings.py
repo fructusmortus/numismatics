@@ -38,9 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
-    'custom_user.apps.CustomUserConfig',
-    'home',
-    'coin_banknote',
+    'custom_user',
 ]
 
 MIDDLEWARE = [

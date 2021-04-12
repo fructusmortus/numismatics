@@ -32,7 +32,7 @@ services:
          - web
   migration:
     image: django
-    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; python manage.py migrate --noinput'
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; python manage.py makemigrations; python manage.py migrate --noinput'
     volumes:
       - .:/code
     depends_on:
