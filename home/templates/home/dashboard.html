@@ -1,0 +1,42 @@
+{% extends 'home/main.html' %}
+
+{% block content %}
+
+{% include 'home/status.html' %}
+
+<br>
+
+<div class="row">
+  <div class="col-md-5">
+    <h5>Collectors:</h5>
+    <hr>
+    <div class="card card-body">
+      <table class="table table-sm">
+        <tr>
+          <th></th>
+          <th>Collector</th>
+          <th>Collection</th>
+        </tr>
+
+      </table>
+    </div>
+  </div>
+
+  <div class="col-md-7">
+    <h5>Last Collections:</h5>
+    <hr>
+    <div class="card card-body">
+      <table class="table table-sm">
+        <tr>
+          <th>Name</th>
+          <th>Date</th>
+          <th>Country</th>
+        </tr>
+
+      </table>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
