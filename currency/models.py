@@ -7,9 +7,9 @@ class Currency(models.Model):
         ('Coin', 'Coin'),
         ('Banknote', 'Banknote'),
     )
-    user = models.ForeignKey(custom_user_models.CustomUser, null=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(custom_user_models.CustomUser, on_delete=models.CASCADE)
     item_type = models.CharField(max_length=200, null=True, choices=ITEM_TYPE)
-    name = models.CharField(max_length=200, null=True)
+    name = models.CharField(max_length=200)
     code = models.IntegerField(null=True)
     release_date = models.DateField(null=True)
     country = models.CharField(max_length=200, null=True)
@@ -18,9 +18,6 @@ class Currency(models.Model):
     series = models.CharField(max_length=200, null=True)
     photo = models.ImageField(null=True, blank=True, upload_to='photos/%Y/%m/%d/')
     date_created = models.DateTimeField(auto_now_add=True)
-    test = models.CharField(max_length=200, null=True, blank=True)
-    test2 = models.CharField(max_length=200, null=True, blank=True)
-    test3 = models.CharField(max_length=200, null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "Currencies"
