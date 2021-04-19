@@ -8,4 +8,4 @@ class CustomUser(models.Model):
     address = models.CharField(max_length=200, null=True)
 
     def __str__(self):
-        return self.name
+        return self.user.username

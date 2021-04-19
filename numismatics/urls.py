@@ -15,11 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from custom_user import views as v
+from custom_user import views as custom_user_views
+from currency import views as currency_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('register/', v.register, name="register"),
+    path('register/', custom_user_views.register, name="register"),
+    path('currencies/', currency_views.currency, name="currency"),
+    path('create_currency/', currency_views.create_currency, name="create_currency"),
     path('', include('home.urls')),
 ]
