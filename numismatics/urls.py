@@ -22,7 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('register/', custom_user_views.register, name="register"),
-    path('custom_user_info/<str:pk>/', custom_user_views.custom_user, name="custom_user"),
     path('currencies/', currency_views.currency, name="currency"),
     path('create_currency/', currency_views.create_currency, name="create_currency"),
     path('', include('home.urls')),
