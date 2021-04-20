@@ -1,7 +1,7 @@
 {% extends 'home/free_layout.html' %}
 {% block content %}
 
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{form}}
     <input type="submit" name="Submit">
