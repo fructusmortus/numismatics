@@ -8,6 +8,13 @@ class Currency(models.Model):
         ('Coin', 'Coin'),
         ('Banknote', 'Banknote'),
     )
+    QUALITY = (
+        ('Mint', 'Mint'),
+        ('Very Good', 'Very Good'),
+        ('Good', 'Good'),
+        ('Fair', 'Fair'),
+        ('Poor', 'Poor'),
+    )
     user = models.ForeignKey(custom_user_models.CustomUser, on_delete=models.CASCADE)
     item_type = models.CharField(max_length=200, null=True, choices=ITEM_TYPE)
     name = models.CharField(max_length=200)
@@ -15,7 +22,7 @@ class Currency(models.Model):
     release_date = models.DateField(null=True)
     country = models.CharField(max_length=200, null=True)
     denomination = models.IntegerField(null=True)
-    quality = models.CharField(max_length=200, null=True)
+    quality = models.CharField(max_length=200, null=True, choices=QUALITY)
     series = models.CharField(max_length=200, null=True)
     photo = models.ImageField(null=True, blank=True, upload_to='photos/%Y/%m/%d/')
     thumbnail = models.ImageField(null=True, blank=True, upload_to='thumbnails/%Y/%m/%d/')
