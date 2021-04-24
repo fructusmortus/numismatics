@@ -6,3 +6,4 @@ class CurrencyForm(ModelForm):
     class Meta:
         model = Currency
         fields = '__all__'
+        exclude = ['user', 'thumbnail', 'date_created']

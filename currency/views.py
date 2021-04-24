@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Currency
+from custom_user import models
 from .forms import CurrencyForm
 
 
@@ -11,10 +12,12 @@ def currency(request):
 def create_currency(request):
     form = CurrencyForm()
     if request.method == 'POST':
-        form = CurrencyForm(request.POST)
+        form = CurrencyForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('/')
+            currency = form.save(commit=False)
+            currency.user = request.user
+            currency.save()
+            return redirect('/currencies')
     context = {'form': form}
     return render(request, 'currency/create_currency.html', context)
 

@@ -132,6 +132,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+AUTH_USER_MODEL = 'custom_user.CustomUser'
 
 LOGIN_REDIRECT_URL = '/'
 CRISPY_TEMPLATE_PACK = "bootstrap4"
