@@ -2,6 +2,10 @@ from django import forms
 from .models import Currency
 
 
+class DateInput(forms.DateInput):
+    input = 'date'
+
+
 class CurrencyForm(forms.ModelForm):
     class Meta:
         model = Currency
@@ -13,9 +17,13 @@ class CurrencyForm(forms.ModelForm):
                 'name': forms.TextInput(attrs={'class': 'form-control'}),
                 'code': forms.TextInput(attrs={'class': 'form-control'}),
                 'country': forms.TextInput(attrs={'class': 'form-control'}),
-                'release_date': forms.TextInput(attrs={'class': 'form-control'}),
+                'release_date': DateInput(attrs={'class': 'form-control'}),
                 'denomination': forms.TextInput(attrs={'class': 'form-control'}),
                 'quality': forms.Select(attrs={'class': 'form-control'}),
                 'series': forms.TextInput(attrs={'class': 'form-control'}),
                 'photo': forms.FileInput(attrs={'class': 'form-control'}),
             }
+
+
+class DateForm(forms.Form):
+    release_date = forms.DateField(widget=DateInput)
