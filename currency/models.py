@@ -1,4 +1,5 @@
 from django.db import models
+from django_countries.fields import CountryField
 from custom_user import models as custom_user_models
 from .thumbnailize import make_thumbnail
 
@@ -20,7 +21,7 @@ class Currency(models.Model):
     name = models.CharField(max_length=200)
     code = models.IntegerField(null=True)
     release_date = models.DateField(null=True)
-    country = models.CharField(max_length=200, null=True)
+    country = CountryField(null=True)
     denomination = models.IntegerField(null=True)
     quality = models.CharField(max_length=200, null=True, choices=QUALITY)
     series = models.CharField(max_length=200, null=True)

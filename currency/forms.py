@@ -7,6 +7,8 @@ class DateInput(forms.DateInput):
 
 
 class CurrencyForm(forms.ModelForm):
+    release_date = forms.DateField(widget=DateInput(attrs={'class': 'form-control'}))
+
     class Meta:
         model = Currency
         fields = '__all__'
@@ -16,14 +18,9 @@ class CurrencyForm(forms.ModelForm):
                 'item_type': forms.Select(attrs={'class': 'form-control'}),
                 'name': forms.TextInput(attrs={'class': 'form-control'}),
                 'code': forms.TextInput(attrs={'class': 'form-control'}),
-                'country': forms.TextInput(attrs={'class': 'form-control'}),
-                'release_date': DateInput(attrs={'class': 'form-control'}),
+                'country': forms.Select(attrs={'class': 'form-control'}),
                 'denomination': forms.TextInput(attrs={'class': 'form-control'}),
                 'quality': forms.Select(attrs={'class': 'form-control'}),
                 'series': forms.TextInput(attrs={'class': 'form-control'}),
                 'photo': forms.FileInput(attrs={'class': 'form-control'}),
             }
-
-
-class DateForm(forms.Form):
-    release_date = forms.DateField(widget=DateInput)
