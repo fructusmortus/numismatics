@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'custom_user',
     'home',
     'currency',
+    'category',
 ]
 
 MIDDLEWARE = [
