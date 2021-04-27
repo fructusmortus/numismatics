@@ -9,39 +9,50 @@
                 <h5>All currencies</h5>
             </div>
             <div class="card card-body">
-                <table class="sortable">
-                    <tr>
-                        <th>User</th>
-                        <th>Type</th>
-                        <th>Name</th>
-                        <th>Code</th>
-                        <th>Release date</th>
-                        <th>Country</th>
-                        <th>Denomination</th>
-                        <th>Quality</th>
-                        <th>Series</th>
-                        <th>Photo</th>
-                        <th>Created at</th>
-                    </tr>
-                    {% for currency in currencies %}
+                <table id="all_currencies" class="table">
+                    <thead>
                         <tr>
-                            <td>{{currency.user}}</td>
-                            <td>{{currency.item_type}}</td>
-                            <td>{{currency.name}}</td>
-                            <td>{{currency.code}}</td>
-                            <td>{{currency.release_date|date:"Y"}}</td>
-                            <td>{{currency.country.name}}</td>
-                            <td>{{currency.denomination}}</td>
-                            <td>{{currency.quality}}</td>
-                            <td>{{currency.series}}</td>
-                            <td><img src="{{currency.thumbnail.url}}"></td>
-                            <td>{{currency.date_created}}</td>
+                            <th>User</th>
+                            <th>Type</th>
+                            <th>Name</th>
+                            <th>Code</th>
+                            <th>Release date</th>
+                            <th>Country</th>
+                            <th>Denomination</th>
+                            <th>Quality</th>
+                            <th>Series</th>
+                            <th>Photo</th>
+                            <th>Created at</th>
                         </tr>
-                    {% endfor %}
+                    </thead>
+                    <tbody>
+                        {% for currency in currencies %}
+                            <tr>
+                                <td>{{currency.user}}</td>
+                                <td>{{currency.item_type}}</td>
+                                <td>{{currency.name}}</td>
+                                <td>{{currency.code}}</td>
+                                <td>{{currency.release_date|date:"Y"}}</td>
+                                <td>{{currency.country.name}}</td>
+                                <td>{{currency.denomination}}</td>
+                                <td>{{currency.quality}}</td>
+                                <td>{{currency.series}}</td>
+                                <td><img src="{{currency.thumbnail.url}}"></td>
+                                <td>{{currency.date_created}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
                 </table>
             </div>
         </div>
     </div>
 <a class="btn btn-primary" href="/create_currency">Create currency</a>
+
+<script type="text/javascript">
+$(document).ready(function () {
+$('#all_currencies').DataTable();
+$('.dataTables_length').addClass('bs-select');
+});
+</script>
 
 {% endblock %}
