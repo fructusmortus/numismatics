@@ -23,6 +23,8 @@
                             <th>Series</th>
                             <th>Photo</th>
                             <th>Created at</th>
+                            <th>Update</th>
+                            <th>Remove</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,6 +41,8 @@
                                 <td>{{currency.series}}</td>
                                 <td><img src="{{currency.thumbnail.url}}"></td>
                                 <td>{{currency.date_created}}</td>
+                                <td>{% if perms.currency.change_currency %}<a class="btn btn-sm btn-info" href="{% url 'update_currency' currency.id %}">Update</a>{% endif %}</td>
+                                <td>{% if perms.currency.delete_currency %}<a class="btn btn-sm btn-danger" href="{% url 'delete_currency' currency.id %}">Delete</a>{% endif %}</td>
                             </tr>
                         {% endfor %}
                     </tbody>

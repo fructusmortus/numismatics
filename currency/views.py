@@ -19,10 +19,27 @@ def create_currency(request):
             currency.save()
             return redirect('/currencies')
     context = {'form': form}
-    return render(request, 'currency/create_currency.html', context)
+    return render(request, 'currency/currency_form.html', context)
 
 
-def update_currency(request):
-    form = CurrencyForm()
+def update_currency(request, pk):
+    currency = Currency.objects.get(id=pk)
+    form = CurrencyForm(instance=currency)
+    if request.method == 'POST':
+        form = CurrencyForm(request.POST, request.FILES, instance=currency)
+        if form.is_valid():
+            currency = form.save(commit=False)
+            currency.user = request.user
+            currency.save()
+            return redirect('/currencies')
     context = {'form': form}
-    return render(request, 'currency/create_currency.html', context)
+    return render(request, 'currency/currency_form.html', context)
+
+
+def delete_currency(request, pk):
+    currency = Currency.objects.get(id=pk)
+    if request.method == 'POST':
+        currency.delete()
+        return redirect('/currencies')
+    context = {'currency': currency}
+    return render(request, 'currency/delete.html', context)
