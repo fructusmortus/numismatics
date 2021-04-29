@@ -1,10 +1,19 @@
 {% extends 'home/free_layout.html' %}
 {% block content %}
 
-<p>Are you sure you want to delete "{{currency}}"?</p>
-<form action="{% url 'delete_currency' currency.id %}" method="POST" class="form-group">
-    {% csrf_token %}
-    <a href="{% url 'currency' %}">Cancel</a>
-    <input type="submit" value="Confirm">
-</form>
+
+<br>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-body">
+            <p>Are you sure you want to delete "{{currency}}"?</p>
+            <form action="{% url 'delete_currency' currency.id %}" method="POST" class="form-group">
+                {% csrf_token %}
+                <a class="btn btn-warning" href="{% url 'currency' %}">Cancel</a>
+                <input class="btn btn-danger" type="submit" value="Confirm">
+            </form>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
