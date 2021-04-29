@@ -10,7 +10,7 @@
             <form action="{% url 'delete_currency' currency.id %}" method="POST" class="form-group">
                 {% csrf_token %}
                 <a class="btn btn-warning" href="{% url 'currency' %}">Cancel</a>
-                <input class="btn btn-danger" type="submit" value="Confirm">
+                <input class="btn btn-danger" type="submit" value="Delete">
             </form>
         </div>
     </div>
