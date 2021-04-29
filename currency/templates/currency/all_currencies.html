@@ -1,12 +1,13 @@
 {% extends 'home/free_layout.html' %}
+
 {% block content %}
 
 <br>
-
+    <p style="text-align: right">Logged as {{ user.get_username }}</p>
     <div class="row">
-        <div class="col-md">
+        <div class="col-md"> 
             <div class="card card-body">
-                <h5>All currencies</h5>
+                <h5>All currencies</h5> 
             </div>
             <div class="card card-body">
                 <table id="all_currencies" class="table">
@@ -23,6 +24,7 @@
                             <th>Series</th>
                             <th>Photo</th>
                             <th>Created at</th>
+                            <th>Update or Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,6 +41,14 @@
                                 <td>{{currency.series}}</td>
                                 <td><img src="{{currency.thumbnail.url}}"></td>
                                 <td>{{currency.date_created}}</td>
+                                <td>
+                                    {% if user.is_authenticated %}
+                                        {% if user.id == currency.user.id %}
+                                            <a class="btn btn-sm btn-info" href="{% url 'update_currency' currency.id %}">Update</a>
+                                            <a class="btn btn-sm btn-danger" href="{% url 'delete_currency' currency.id %}">Delete</a>
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>
