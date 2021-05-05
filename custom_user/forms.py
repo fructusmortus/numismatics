@@ -8,19 +8,19 @@ class RegisterForm(UserCreationForm):
 
     username = forms.CharField(
         label="Username",
-        widget=forms.TextInput(attrs={'class':'form-control', 'type':'username'}),
+        widget=forms.TextInput(attrs={'class': 'form-control', 'type': 'username'}),
     )
     email = forms.EmailField(
-        max_length=100, 
+        max_length=100,
         widget=forms.EmailInput(attrs={'class': 'form-control'}),
         )
     password1 = forms.CharField(
         label="Password",
-        widget=forms.PasswordInput(attrs={'class':'form-control', 'type':'password'}),
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'type': 'password'}),
     )
     password2 = forms.CharField(
         label="Confirm password",
-        widget=forms.PasswordInput(attrs={'class':'form-control', 'type':'password'}),
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'type': 'password'}),
     )
 
     class Meta:
