@@ -4,9 +4,20 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <form method="POST" class="form-group">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button type="submit" class="btn btn-success">Register</button>
-    </form>    
+<div class="registration-form">
+    <div class="mb-3">
+        <form method="POST" class="form-group">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="mt16 btn btn-primary left">Register</button>
+            <input type="reset" id="CancelButton" value="Cancel" class="mt16 btn btn-danger right"/>
+
+            <script type="text/javascript">
+                document.getElementById("CancelButton").onclick = function () {
+                    location.href = "/";
+                };
+            </script>
+        </form>   
+    </div>
+</div> 
 {% endblock %}
