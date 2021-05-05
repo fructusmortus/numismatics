@@ -1,16 +1,33 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import Currency
 from custom_user import models
 from .forms import CurrencyForm
 
 
+def has_perm(self, perm, obj=None):
+    try:
+        user_perm = self.user_permissions.get(codename=perm)
+    except ObjectDoesNotExist:
+        user_perm = False
+    if user_perm:
+        return True
+    else:
+        return False
+
+
+def permission_required(*perms):
+    return user_passes_test(lambda u: any(u.has_perm(perm) for perm in perms), login_url='/')
+
+
+@permission_required("currency.view_currency")
 def currency(request):
     currencies = Currency.objects.all()
     return render(request, 'currency/all_currencies.html', {'currencies': currencies})
 
 
 @login_required
+@permission_required("currency.add_currency")
 def create_currency(request):
     form = CurrencyForm()
     if request.method == 'POST':
@@ -25,6 +42,7 @@ def create_currency(request):
 
 
 @login_required
+@permission_required("currency.change_currency")
 def update_currency(request, pk):
     currency = Currency.objects.get(id=pk)
     form = CurrencyForm(instance=currency)
@@ -38,6 +56,7 @@ def update_currency(request, pk):
 
 
 @login_required
+@permission_required("currency.delete_currency")
 def delete_currency(request, pk):
     currency = Currency.objects.get(id=pk)
     if request.method == 'POST':
