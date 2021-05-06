@@ -6,10 +6,7 @@ from .forms import CurrencyForm
 
 
 def has_perm(self, perm, obj=None):
-    try:
-        user_perm = self.user_permissions.get(codename=perm)
-    except ObjectDoesNotExist:
-        user_perm = False
+    user_perm = self.user_permissions.get(codename=perm)
     if user_perm:
         return True
     else:
