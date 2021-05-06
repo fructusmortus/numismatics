@@ -1,5 +1,5 @@
 {% extends 'home/free_layout.html' %}
-
+{% load currency_extras %}
 {% block content %}
 
 <br>
@@ -24,7 +24,9 @@
                             <th>Series</th>
                             <th>Photo</th>
                             <th>Created at</th>
-                            <th>Update or Delete</th>
+                            {% if user|is_group:"Creators" %}
+                                <th>Update or Delete</th>
+                            {% endif %}
                         </tr>
                     </thead>
                     <tbody>
@@ -42,12 +44,14 @@
                                 <td><img src="{{currency.thumbnail.url}}"></td>
                                 <td>{{currency.date_created}}</td>
                                 <td>
-                                    {% if user.is_authenticated %}
+                                {% if user.is_authenticated %}    
+                                    {% if user|is_group:"Creators" %}   
                                         {% if user.id == currency.user.id %}
                                             <a class="btn btn-sm btn-info" href="{% url 'update_currency' currency.id %}">Update</a>
                                             <a class="btn btn-sm btn-danger" href="{% url 'delete_currency' currency.id %}">Delete</a>
                                         {% endif %}
                                     {% endif %}
+                                {% endif %}
                                 </td>
                             </tr>
                         {% endfor %}
@@ -56,13 +60,15 @@
             </div>
         </div>
     </div>
-<a class="btn btn-primary" href="/create_currency">Create currency</a>
+{% if user|is_group:"Creators" %}
+    <a class="btn btn-primary" href="/create_currency">Create currency</a>
+{% endif %}
 
 <script type="text/javascript">
-$(document).ready(function () {
-$('#all_currencies').DataTable();
-$('.dataTables_length').addClass('bs-select');
-});
+    $(document).ready(function () {
+    $('#all_currencies').DataTable();
+    $('.dataTables_length').addClass('bs-select');
+    });
 </script>
 
 {% endblock %}
