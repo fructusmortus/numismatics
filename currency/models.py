@@ -1,6 +1,7 @@
 from django.db import models
 from django_countries.fields import CountryField
 from custom_user import models as custom_user_models
+from category.models import Category
 from .thumbnailize import make_thumbnail
 
 
@@ -17,6 +18,7 @@ class Currency(models.Model):
         ('Poor', 'Poor'),
     )
     user = models.ForeignKey(custom_user_models.CustomUser, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.CASCADE)
     item_type = models.CharField(max_length=200, null=True, choices=ITEM_TYPE)
     name = models.CharField(max_length=200)
     code = models.IntegerField(null=True)
