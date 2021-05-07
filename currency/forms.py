@@ -18,6 +18,7 @@ class CurrencyForm(forms.ModelForm):
                 'item_type': forms.Select(attrs={'class': 'form-control'}),
                 'name': forms.TextInput(attrs={'class': 'form-control'}),
                 'code': forms.TextInput(attrs={'class': 'form-control'}),
+                'category': forms.Select(attrs={'class': 'form-control'}),
                 'country': forms.Select(attrs={'class': 'form-control'}),
                 'denomination': forms.TextInput(attrs={'class': 'form-control'}),
                 'quality': forms.Select(attrs={'class': 'form-control'}),

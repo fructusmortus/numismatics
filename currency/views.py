@@ -26,6 +26,32 @@ def currency(request):
 @login_required
 @permission_required("currency.add_currency")
 def create_currency(request):
+    categories = {
+    "USSR": {
+        "1920-1950": {
+            "1920-1930": {},
+            "1930-1950": {
+                "1930": {},
+                "1950": {}   
+            }
+        }
+
+    },
+    "Austria": {
+        "1910": {},
+        "1920": {
+            "Shilling coins": {},
+            "Shilling banknotes": {
+                "Mint": {},
+                "Fair": {}
+            }
+        }
+    },
+    "Netherlands": {
+        "Modern euros": {},
+        "Old guldens": {}
+    }
+    }
     form = CurrencyForm()
     if request.method == 'POST':
         form = CurrencyForm(request.POST, request.FILES)
