@@ -11,9 +11,3 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-        # full_path = [self.name]                  
-        # k = self.parent_id
-        # while k is not None:
-        #     full_path.append(k.name)
-        #     k = k.parent_id
-        # return ' -> '.join(full_path[::-1])
