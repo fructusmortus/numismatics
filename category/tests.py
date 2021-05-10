@@ -1,5 +1,7 @@
 from django.test import TestCase
 from .models import Category
+from tree.tree import Tree
+
 
 class CategoryTestCase(TestCase):
     def setUp(self):
@@ -13,20 +15,18 @@ class CategoryTestCase(TestCase):
 
 
     def test_top_categories(self):
-
-        def recur(children, path):
-            if children:
-                for child in children:
-                    children = Category.objects.filter(parent=child)
-                    recur(children, path + [child.name])
-            else:
-                print(path)
-
         top_categories = Category.objects.filter(parent=None)
-        for category in top_categories:
-            topcat = Category.objects.filter(name=category.name).first()
-            children = Category.objects.filter(parent=topcat) 
-            recur(children, [topcat.name])
+        category_names = [category.name for category in top_categories]
+        self.assertEqual(["Modern", "Medieval"], category_names)
 
-        # category_names = [category.name for category in top_categories]
-        # self.assertEqual(["Modern", "Medieval"], category_names)
+    # def test_path_lists(self):
+    #     tree = Tree(Category)
+    #     expected = [['Modern', 'Austria'], 
+    #                 ['Modern', 'USSR', '1920-1950 series'], 
+    #                 ['Modern', 'USSR', '1950-1980 series'], 
+    #                 ['Medieval', 'Greece']]
+    #     self.assertEqual(expected, tree.path_lists())
+
+    def test_temporary(self):
+        tree = Tree(Category)
+        print(tree.get_nested_dict())
