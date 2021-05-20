@@ -18,7 +18,7 @@ class Currency(models.Model):
         ('Poor', 'Poor'),
     )
     user = models.ForeignKey(custom_user_models.CustomUser, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, related_name='categories', null=True, blank=True, on_delete=models.CASCADE)
     item_type = models.CharField(max_length=200, null=True, choices=ITEM_TYPE)
     name = models.CharField(max_length=200)
     code = models.IntegerField(null=True)
