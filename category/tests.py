@@ -17,7 +17,6 @@ class CategoryTestCase(TestCase):
         self.british_pound = Category.objects.create(name="British pound", parent=self.circulating)
         self.libyan_dinar = Category.objects.create(name="Libyan dinar", parent=self.circulating)
 
-
     def test_top_categories(self):
         top_categories = Category.objects.filter(parent=None)
         category_names = [category.name for category in top_categories]

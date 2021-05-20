@@ -1,5 +1,6 @@
 from django import forms
 from .models import Currency
+from category.models import Category
 from .utils import categories_to_dropdown_options
 
 
@@ -9,7 +10,9 @@ class DateInput(forms.DateInput):
 
 class CurrencyForm(forms.ModelForm):
     release_date = forms.DateField(widget=DateInput(attrs={'class': 'form-control'}))
-    category = forms.CharField(widget=forms.Select(choices=categories_to_dropdown_options()))
+    category = forms.ModelChoiceField(queryset=Category.objects.all(),
+                                      widget=forms.Select(attrs={'class': 'form-control'},
+                                      choices=categories_to_dropdown_options()))
 
     class Meta:
         model = Currency
