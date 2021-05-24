@@ -10,9 +10,9 @@ class DateInput(forms.DateInput):
 
 class CurrencyForm(forms.ModelForm):
     release_date = forms.DateField(widget=DateInput(attrs={'class': 'form-control'}))
-    category = forms.ModelChoiceField(queryset=Category.objects.all(),
-                                      widget=forms.Select(attrs={'class': 'form-control'},
-                                      choices=categories_to_dropdown_options()))
+    # category = forms.ModelChoiceField(queryset=Category.objects.all(),
+    #                                   widget=forms.Select(attrs={'class': 'form-control'},
+    #                                   choices=categories_to_dropdown_options()))
 
     class Meta:
         model = Currency
