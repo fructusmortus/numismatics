@@ -2,6 +2,7 @@ from django import forms
 from .models import Currency
 from category.models import Category
 from .utils import categories_to_dropdown_options
+from mptt.forms import TreeNodeChoiceField
 
 
 class DateInput(forms.DateInput):
@@ -10,9 +11,8 @@ class DateInput(forms.DateInput):
 
 class CurrencyForm(forms.ModelForm):
     release_date = forms.DateField(widget=DateInput(attrs={'class': 'form-control'}))
-    # category = forms.ModelChoiceField(queryset=Category.objects.all(),
-    #                                   widget=forms.Select(attrs={'class': 'form-control'},
-    #                                   choices=categories_to_dropdown_options()))
+    category = TreeNodeChoiceField(queryset=Category.objects.all(),
+                                      widget=forms.Select(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Currency
