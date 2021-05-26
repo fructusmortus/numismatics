@@ -16,17 +16,16 @@
                             <th>User</th>
                             <th>Type</th>
                             <th>Name</th>
+                            <th>Category</th>
                             <th>Code</th>
                             <th>Release date</th>
                             <th>Country</th>
                             <th>Denomination</th>
                             <th>Quality</th>
                             <th>Series</th>
-                            <th>Photo</th>
+                            <th class="no-sort">Photo</th>
                             <th>Created at</th>
-                            {% if user|is_group:"Creators" %}
-                                <th>Update or Delete</th>
-                            {% endif %}
+                            <th class="no-sort"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,6 +34,7 @@
                                 <td>{{currency.user}}</td>
                                 <td>{{currency.item_type}}</td>
                                 <td>{{currency.name}}</td>
+                                <td>{{currency.category}}</td>
                                 <td>{{currency.code}}</td>
                                 <td>{{currency.release_date|date:"Y"}}</td>
                                 <td>{{currency.country.name}}</td>
@@ -47,8 +47,8 @@
                                 {% if user.is_authenticated %}    
                                     {% if user|is_group:"Creators" %}   
                                         {% if user.id == currency.user.id %}
-                                            <a class="btn btn-sm btn-info" href="{% url 'update_currency' currency.id %}">Update</a>
-                                            <a class="btn btn-sm btn-danger" href="{% url 'delete_currency' currency.id %}">Delete</a>
+                                            <a class="btn btn-sm btn-info right" href="{% url 'update_currency' currency.id %}">Update</a>
+                                            <a class="btn btn-sm btn-danger right" href="{% url 'delete_currency' currency.id %}">Delete</a>
                                         {% endif %}
                                     {% endif %}
                                 {% endif %}
@@ -66,7 +66,12 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-    $('#all_currencies').DataTable();
+    $('#all_currencies').DataTable({
+            "columnDefs": [ {
+              "targets": 'no-sort',
+              "orderable": false,
+        } ]
+    });
     $('.dataTables_length').addClass('bs-select');
     });
 </script>
