@@ -12,7 +12,7 @@ class DateInput(forms.DateInput):
 class CurrencyForm(forms.ModelForm):
     release_date = forms.DateField(widget=DateInput(attrs={'class': 'form-control'}))
     category = TreeNodeChoiceField(queryset=Category.objects.all(),
-                                      widget=forms.Select(attrs={'class': 'form-control'}))
+                                   widget=forms.Select(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Currency
