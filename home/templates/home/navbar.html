@@ -27,7 +27,7 @@
                             </ul>
                         </li>
                     {% else %}
-                        <li><a class="dropdown-item" href="#"> {{ node.name }} </a> </li>
+                        <li><a class="dropdown-item" href="{% url 'category_currencies' node.id node.slug %}"> {{ node.name }} </a> </li>
                     {% endif %}
                 {% endrecursetree %}
             </ul>

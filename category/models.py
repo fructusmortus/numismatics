@@ -7,6 +7,7 @@ class Category(MPTTModel):
 
     name = models.CharField(max_length=256)
     parent = TreeForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
+    slug = models.SlugField()
 
     class Meta():
         verbose_name_plural = "Categories"
