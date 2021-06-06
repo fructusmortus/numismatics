@@ -2,12 +2,14 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from category.models import Category
 from currency.models import Currency
+from collection.models import Collection
 
 
 @login_required
 def home(request):
     category = Category.objects.all()
-    context = {'category': category}
+    collections = Collection.objects.all()
+    context = {'category': category, 'collections': collections}
     return render(request, 'home/dashboard.html', context)
 
 

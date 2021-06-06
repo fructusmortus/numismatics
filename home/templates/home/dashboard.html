@@ -17,21 +17,39 @@
           <th>Collector</th>
           <th>Collection</th>
         </tr>
-
       </table>
     </div>
   </div>
 
   <div class="col-md-7">
-    <h5>Last Collections:</h5>
+    <h5>Collections:</h5>
     <hr>
     <div class="card card-body">
       <table class="table table-sm">
-        <tr>
-          <th>Name</th>
-          <th>Date</th>
-          <th>Country</th>
-        </tr>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>User</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for collection in collections %}
+            <tr>
+              <td>{{collection.name}}</td>
+              <td>{{collection.user}}</td>
+              <td>{{collection.date_created}}</td>
+              <td>
+                {% if user.is_authenticated %}
+                  {% if user.id == collection.user.id %}
+                    <a class="btn btn-sm btn-info right" href="{% url 'collection:update_collection' collection.id %}">Update</a>
+                    <a class="btn btn-sm btn-danger right" href="{% url 'collection:delete_collection' collection.id %}">Delete</a>
+                  {% endif %}
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
 
       </table>
     </div>
