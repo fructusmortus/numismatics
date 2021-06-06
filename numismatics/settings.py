@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'home',
     'currency',
     'category',
+    'collection',
 ]
 
 MIDDLEWARE = [
